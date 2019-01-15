@@ -1,0 +1,14 @@
+{
+  "name": "live-balls",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Mehmet <mehmetzeybek89@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mzeybek89/live-balls",
+  "dependencies": {
+    "angular": "^1.7.5",
+    "semantic": "^2.4.1"
+  }
+}
