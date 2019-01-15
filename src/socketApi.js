@@ -3,13 +3,13 @@ const io = socketio();
 const socketApi = {};
 socketApi.io = io;
 
-const users = [];
+const users = {};
 
 io.on('connection',(socket)=>{
 
     socket.on('newUser',(data)=>{
         const defaultData = {
-            id: socket.id,
+            id:socket.id,
             position:{
                 x:0,
                 y:0
@@ -17,9 +17,17 @@ io.on('connection',(socket)=>{
         };
 
         const userData = Object.assign(data,defaultData);
-        users.push(userData);
+        users[socket.id]=userData;
+        socket.broadcast.emit('newUser',userData);
+        io.emit('initPlayers',users);
 
     });
+
+    socket.on('disconnect',()=>{
+        socket.broadcast.emit('disUser',users[socket.id]);
+        delete users[socket.id];
+    });
+
 });
 
 module.exports= socketApi;
